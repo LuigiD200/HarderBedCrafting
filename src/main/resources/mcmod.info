@@ -1,12 +1,12 @@
 [{
   "modid": "harderbedcrafting",
   "name": "Harder Bed Crafting",
-  "description": "",
+  "description": "A mod that makes crafting beds more challenging by adding new materials and recipes.",
   "version": "1.0",
   "mcversion": "1.12.2",
-  "logoFile": "assets/examplemod/textures/logo.png",
-  "url": "minecraftforge.net/",
-  "updateJSON": "minecraftforge.net/versions.json",
-  "authorList": ["Author"],
-  "credits": "I'd like to thank my mother and father."
+  "logoFile": "",
+  "url": "https://github.com/LuigiD200/HarderBedCrafting",
+  "updateJSON": "",
+  "authorList": ["LuigiD"],
+  "credits": ""
 }]
