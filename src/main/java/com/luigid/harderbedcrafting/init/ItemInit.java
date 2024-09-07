@@ -10,4 +10,5 @@ public class ItemInit {
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
     public static final Item EXAMPLE_ITEM = new ItemBase("example_item");
+    public static final Item EXAMPLE_PLUS_ITEM = new ItemBase("example_plus_item");
 }
