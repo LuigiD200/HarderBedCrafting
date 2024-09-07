@@ -14,7 +14,6 @@ public class HarderBedCrafting {
 
     @Mod.Instance
     public static HarderBedCrafting instance;
-
     @SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
     public static CommonProxy proxy;
 
