@@ -14,18 +14,6 @@ import net.minecraft.item.ItemBlock;
 import java.util.Objects;
 
 public class BlockBase extends Block implements IHasModel {
-    public BlockBase(String name, Material material) {
-        super(material);
-        setUnlocalizedName(Reference.MOD_ID + "." + name);
-        setRegistryName(name);
-        setCreativeTab(CreativeTabs.MISC);
-
-        BlockInit.BLOCKS.add(this);
-
-        ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
-    }
-
-    /*
     public BlockBase(String name, Material material, boolean hasItemBlock) {
         super(material);
         setUnlocalizedName(Reference.MOD_ID + "." + name);
@@ -36,7 +24,13 @@ public class BlockBase extends Block implements IHasModel {
 
         if (hasItemBlock) ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
-     */
+
+    //If you don't specify whenever the block has or doesn't have an ItemBlock, the code will interpret that as true
+    public BlockBase(String name, Material material) {
+        this(name, material, true);
+    }
+
+
 
     @Override
     public void registerModels() {

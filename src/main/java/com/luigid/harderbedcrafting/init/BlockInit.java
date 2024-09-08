@@ -11,4 +11,5 @@ public class BlockInit {
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
     public static final Block EXAMPLE_BLOCK = new BlockBase("example_block", Material.ROCK);
+    public static final Block EXAMPLE_BLOCK_WITH_NO_ITEMBLOCK = new BlockBase("example_block_with_no_itemblock", Material.ROCK, false);
 }
