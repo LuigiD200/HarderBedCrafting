@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "harderbedcrafting:example_block_custom_model" }
+  }
+}
