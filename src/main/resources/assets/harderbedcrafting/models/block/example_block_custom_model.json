@@ -3,7 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "harderbedcrafting:blocks/example_block_custom_model"
+		"0": "harderbedcrafting:blocks/example_block_custom_model",
+		"particle": "blocks/concrete_pink"
 	},
 	"elements": [
 		{
