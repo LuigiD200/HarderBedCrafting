@@ -8,3 +8,4 @@ tile.harderbedcrafting.example_block.name=Example Block
 tile.harderbedcrafting.example_block_with_no_itemblock.name=Example Block With No ItemBlock
 tile.harderbedcrafting.example_block_custom_model.name=Example Block Custom Model
 tile.harderbedcrafting.example_double_block.name=Example Double Block
+tile.harderbedcrafting.bed_frame.name=Bed Frame
