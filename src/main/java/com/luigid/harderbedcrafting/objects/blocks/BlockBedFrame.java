@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+
 public class BlockBedFrame extends BlockHorizontal {
 
     public static final PropertyEnum<BlockPart> PART = PropertyEnum.create("part", BlockPart.class);
@@ -68,7 +69,7 @@ public class BlockBedFrame extends BlockHorizontal {
         {
             if (!worldIn.isRemote)
             {
-                this.dropBlockAsItem(worldIn, pos, state, 0);
+                spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
             }
 
             worldIn.setBlockToAir(pos);
@@ -76,9 +77,14 @@ public class BlockBedFrame extends BlockHorizontal {
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
     {
-        return state.getValue(PART) == BlockPart.FOOT ? Items.AIR : ItemInit.BED_FRAME;
+        super.getDrops(drops, world, pos, state, fortune);
+
+        if (state.getValue(PART) == BlockPart.HEAD) {
+            drops.clear();
+            drops.add(new ItemStack(ItemInit.BED_FRAME));
+        }
     }
 
     @Override
@@ -92,18 +98,15 @@ public class BlockBedFrame extends BlockHorizontal {
         return EnumPushReaction.DESTROY;
     }
 
+
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        BlockPos blockpos = pos;
-
-        if (state.getValue(PART) == BlockPart.FOOT)
-        {
-            blockpos = pos.offset((EnumFacing)state.getValue(FACING));
-        }
-
-       return new ItemStack(ItemInit.BED_FRAME, 1);
+        return new ItemStack(ItemInit.BED_FRAME);
     }
+
+
+
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
@@ -118,6 +121,7 @@ public class BlockBedFrame extends BlockHorizontal {
             }
         }
     }
+
 
     @Override
     public IBlockState getStateFromMeta(int meta) {

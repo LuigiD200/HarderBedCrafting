@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,part=foot": { "model": "harderbedcrafting:bed_frame_mattress_foot", "y": 0 },
+    "facing=south,part=foot": { "model": "harderbedcrafting:bed_frame_mattress_foot", "y": 180 },
+    "facing=west,part=foot": { "model": "harderbedcrafting:bed_frame_mattress_foot", "y": 270 },
+    "facing=east,part=foot": { "model": "harderbedcrafting:bed_frame_mattress_foot", "y": 90 },
+    "facing=north,part=head": { "model": "harderbedcrafting:bed_frame_mattress_head", "y": 0 },
+    "facing=south,part=head": { "model": "harderbedcrafting:bed_frame_mattress_head", "y": 180 },
+    "facing=west,part=head": { "model": "harderbedcrafting:bed_frame_mattress_head", "y": 270 },
+    "facing=east,part=head": { "model": "harderbedcrafting:bed_frame_mattress_head", "y": 90 }
+  }
+}

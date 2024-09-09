@@ -1,5 +1,7 @@
 # Items
 item.harderbedcrafting.bed_frame.name=Bed Frame
+item.harderbedcrafting.bed_mattress.name=Bed Mattress
 
 #Blocks
 tile.harderbedcrafting.bed_frame.name=Bed Frame
+tile.harderbedcrafting.bed_frame_mattress.name=Bed Frame with Mattress
