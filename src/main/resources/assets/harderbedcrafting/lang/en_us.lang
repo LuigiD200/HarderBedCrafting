@@ -2,6 +2,7 @@
 item.harderbedcrafting.example_item.name=Example Item
 item.harderbedcrafting.example_plus_item.name=Example Plus Item
 item.harderbedcrafting.example_item_wand.name=Example Item Wand
+item.harderbedcrafting.bed_frame.name=Bed Frame
 
 #Blocks
 tile.harderbedcrafting.example_block.name=Example Block
