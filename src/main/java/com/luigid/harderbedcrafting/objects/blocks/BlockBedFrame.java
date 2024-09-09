@@ -6,6 +6,7 @@ import com.luigid.harderbedcrafting.init.ItemInit;
 import com.luigid.harderbedcrafting.util.IHasModel;
 import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.entity.EntityLivingBase;
@@ -51,6 +53,11 @@ public class BlockBedFrame extends BlockHorizontal implements IHasModel {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return FRAME_AABB;
+    }
+
+    public EnumPushReaction getMobilityFlag(IBlockState state)
+    {
+        return EnumPushReaction.DESTROY;
     }
 
     @Override
@@ -101,26 +108,23 @@ public class BlockBedFrame extends BlockHorizontal implements IHasModel {
                 .withProperty(PART, BlockPart.FOOT);
     }
 
-
-    //TO FIX
-    @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return super.canPlaceBlockAt(world, pos);
-    }
-
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (!world.isRemote) {
             EnumFacing facing = (EnumFacing) state.getValue(FACING);
             BlockPos headPos = pos.offset(facing);
             if (state.getValue(PART) == BlockPart.FOOT) {
-                    // Place the HEAD part of the block
-                    world.setBlockState(headPos, this.getDefaultState()
-                            .withProperty(PART, BlockPart.HEAD)
-                            .withProperty(FACING, facing), 2);
+                if (canPlaceBlockAt(world, headPos)) {
+                        // Place the HEAD part of the block
+                        world.setBlockState(headPos, this.getDefaultState()
+                                .withProperty(PART, BlockPart.HEAD)
+                                .withProperty(FACING, facing), 2);
+                } else {
+                    world.destroyBlock(pos, true);
                 }
             }
         }
+    }
 
 
 
