@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "harderbedcrafting:blocks/example_double_block_foot"
+  }
+}
