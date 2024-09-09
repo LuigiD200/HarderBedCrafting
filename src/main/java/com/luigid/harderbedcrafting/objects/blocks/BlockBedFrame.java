@@ -54,27 +54,69 @@ public class BlockBedFrame extends BlockHorizontal {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        if (heldItem.getItem() == ItemInit.BED_MATTRESS) {
+            IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
+                    .withProperty(FACING, state.getValue(FACING))
+                    .withProperty(PART, state.getValue(PART));
 
-        if (state.getValue(PART) == BlockPart.FOOT)
-        {
-            if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() != this)
-            {
-                worldIn.setBlockToAir(pos);
+            worldIn.setBlockState(pos, newBlockState, 3);
+
+            if (!playerIn.isCreative()) {
+                heldItem.shrink(1);
             }
+
+            //Play sound event
+            return true;
         }
-        else if (worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getBlock() != this)
-        {
-            if (!worldIn.isRemote)
-            {
-                spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
-            }
 
-            worldIn.setBlockToAir(pos);
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        EnumFacing facing = state.getValue(FACING);
+        BlockPos headPos = pos.offset(facing);
+        BlockPos footPos = pos.offset(facing.getOpposite());
+        Block headBlock = worldIn.getBlockState(headPos).getBlock();
+        Block footBlock = worldIn.getBlockState(footPos).getBlock();
+
+        if (state.getValue(PART) == BlockPart.FOOT) {
+            // Check if the HEAD block is missing
+            if (headBlock != this) {
+                if (headBlock == BlockInit.BED_FRAME_MATTRESS) {
+                    // Update the HEAD block to match the FOOT block
+                    IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
+                            .withProperty(FACING, facing)
+                            .withProperty(PART, BlockPart.FOOT);
+                    worldIn.setBlockState(pos, newBlockState, 3);
+                } else {
+                    // Remove the FOOT block if HEAD block is missing
+                    worldIn.setBlockToAir(pos);
+                }
+            }
+        } else if (state.getValue(PART) == BlockPart.HEAD) {
+            // Check if the FOOT block is missing
+            if (footBlock != this) {
+                if (footBlock == BlockInit.BED_FRAME_MATTRESS) {
+                    // Update the FOOT block to match the HEAD block
+                    IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
+                            .withProperty(FACING, facing)
+                            .withProperty(PART, BlockPart.HEAD);
+                    worldIn.setBlockState(pos, newBlockState, 3);
+                } else {
+                    // Drop the item if FOOT block is missing
+                    if (!worldIn.isRemote) {
+                        spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
+                    }
+                    worldIn.setBlockToAir(pos);
+                }
+            }
         }
     }
+
+
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
@@ -186,4 +228,5 @@ public class BlockBedFrame extends BlockHorizontal {
             return this.name;
         }
     }
+
 }
