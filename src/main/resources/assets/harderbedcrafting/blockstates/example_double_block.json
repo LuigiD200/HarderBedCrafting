@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "part=foot": { "model": "harderbedcrafting:example_double_block_foot" },
-    "part=head": { "model": "harderbedcrafting:example_double_block_head" }
-  }
-}

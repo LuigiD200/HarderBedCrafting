@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class ItemBedFrame extends ItemBase {
     public ItemBedFrame(String name) {
         super(name);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
+        this.setCreativeTab(CreativeTabs.MISC);
         this.setMaxDamage(0);
     }
 
@@ -61,6 +61,11 @@ public class ItemBedFrame extends ItemBase {
                 return EnumActionResult.FAIL;
             }
         }
+    }
+
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return 1;
     }
 }
 

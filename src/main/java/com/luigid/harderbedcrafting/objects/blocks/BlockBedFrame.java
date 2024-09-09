@@ -11,7 +11,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -27,13 +26,12 @@ import java.util.Random;
 public class BlockBedFrame extends BlockHorizontal {
 
     public static final PropertyEnum<BlockPart> PART = PropertyEnum.create("part", BlockPart.class);
-    protected static final AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    protected static final AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125, 1.0D);
 
     public BlockBedFrame(String name, Material material) {
         super(material);
         setUnlocalizedName(Reference.MOD_ID + "." + name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.MISC);
 
         BlockInit.BLOCKS.add(this);
 
