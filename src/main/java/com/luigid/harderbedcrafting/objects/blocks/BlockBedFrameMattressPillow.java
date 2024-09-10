@@ -35,6 +35,8 @@ public class BlockBedFrameMattressPillow extends BlockBedFrameMattress {
         if (otherState.getBlock() != this) {
             if (state.getValue(PART) == BlockPart.HEAD && !worldIn.isRemote) {
                 spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
+                spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_MATTRESS));
+                spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_PILLOW));
             }
             worldIn.setBlockToAir(pos);
         }

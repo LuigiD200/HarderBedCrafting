@@ -5,6 +5,7 @@ import com.luigid.harderbedcrafting.init.ItemInit;
 import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -31,6 +32,7 @@ public class BlockBedFrame extends BlockHorizontal {
         setRegistryName(name);
         BlockInit.BLOCKS.add(this);
         setHardness(0.2F);
+        setSoundType(SoundType.WOOD);
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(PART, BlockPart.FOOT)
                 .withProperty(FACING, EnumFacing.NORTH));
@@ -49,21 +51,20 @@ public class BlockBedFrame extends BlockHorizontal {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = playerIn.getHeldItem(hand);
-        if (heldItem.getItem() == ItemInit.BED_MATTRESS) {
-            IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
-                    .withProperty(FACING, state.getValue(FACING))
-                    .withProperty(PART, state.getValue(PART));
+        if (heldItem.getItem() != ItemInit.BED_MATTRESS) return false;
 
-            worldIn.setBlockState(pos, newBlockState, 3);
+        IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
+                .withProperty(FACING, state.getValue(FACING))
+                .withProperty(PART, state.getValue(PART));
 
-            if (!playerIn.isCreative()) {
-                heldItem.shrink(1);
-            }
+        worldIn.setBlockState(pos, newBlockState, 3);
 
-            worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            return true;
+        if (!playerIn.isCreative()) {
+            heldItem.shrink(1);
         }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+
+        worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        return true;
     }
 
     @Override
@@ -82,11 +83,15 @@ public class BlockBedFrame extends BlockHorizontal {
             } else {
                 if (state.getValue(PART) == BlockPart.HEAD && !worldIn.isRemote) {
                     spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
-                    spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_MATTRESS));
                 }
                 worldIn.setBlockToAir(pos);
             }
         }
+    }
+
+    @Override
+    protected Block setSoundType(SoundType sound) {
+        return super.setSoundType(sound);
     }
 
     @Override

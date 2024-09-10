@@ -3,6 +3,7 @@ package com.luigid.harderbedcrafting.objects.items;
 import com.luigid.harderbedcrafting.init.BlockInit;
 import com.luigid.harderbedcrafting.objects.blocks.BlockBedFrame;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 public class ItemBedFrame extends ItemBase {
     public ItemBedFrame(String name) {
         super(name);
-        this.setCreativeTab(CreativeTabs.MISC);
+        this.setCreativeTab(CreativeTabs.DECORATIONS);
         this.setMaxDamage(0);
     }
 
@@ -57,8 +58,8 @@ public class ItemBedFrame extends ItemBase {
                     worldIn.setBlockState(pos, iblockstate2, 10);
                     worldIn.setBlockState(blockpos, iblockstate2.withProperty(BlockBedFrame.PART, BlockBedFrame.BlockPart.HEAD), 10);
 
-                    // Play wood placing sound
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
+                    SoundType soundtype = iblockstate2.getBlock().getSoundType(iblockstate2, worldIn, pos, player);
+                    worldIn.playSound((EntityPlayer)null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
                     itemstack.shrink(1);
                     return EnumActionResult.SUCCESS;
@@ -69,6 +70,11 @@ public class ItemBedFrame extends ItemBase {
                 return EnumActionResult.FAIL;
             }
         }
+    }
+
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return 1;
     }
 }
 

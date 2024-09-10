@@ -34,6 +34,8 @@ public class ItemBedBlanket extends Item {
         ItemInit.ITEMS.add(this);
     }
 
+
+
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getBlockState(pos).getBlock() != BlockInit.BED_FRAME_MATTRESS_PILLOW) return EnumActionResult.FAIL;

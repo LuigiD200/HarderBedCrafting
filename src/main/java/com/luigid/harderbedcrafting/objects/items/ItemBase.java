@@ -10,12 +10,7 @@ public class ItemBase extends Item {
     public ItemBase(String name) {
         setUnlocalizedName(Reference.MOD_ID + "." + name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.MISC);
+        setCreativeTab(CreativeTabs.DECORATIONS);
         ItemInit.ITEMS.add(this);
-    }
-
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return 1;
     }
 }

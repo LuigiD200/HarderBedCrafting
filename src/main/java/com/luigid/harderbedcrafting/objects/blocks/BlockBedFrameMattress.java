@@ -43,22 +43,20 @@ public class BlockBedFrameMattress extends BlockBedFrame {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = playerIn.getHeldItem(hand);
-        if (heldItem.getItem() == ItemInit.BED_PILLOW) {
-            IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS_PILLOW.getDefaultState()
-                    .withProperty(FACING, state.getValue(FACING))
-                    .withProperty(PART, state.getValue(PART));
+        if (heldItem.getItem() != ItemInit.BED_PILLOW) return false;
 
-            worldIn.setBlockState(pos, newBlockState, 3);
+        IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS_PILLOW.getDefaultState()
+                .withProperty(FACING, state.getValue(FACING))
+                .withProperty(PART, state.getValue(PART));
 
-            if (!playerIn.isCreative()) {
-                heldItem.shrink(1);
-            }
+        worldIn.setBlockState(pos, newBlockState, 3);
 
-            worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            return true;
+        if (!playerIn.isCreative()) {
+            heldItem.shrink(1);
         }
 
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+        worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        return true;
     }
 
     @Override
