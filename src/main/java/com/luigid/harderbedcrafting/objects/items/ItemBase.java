@@ -7,10 +7,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemBase extends Item {
-    public ItemBase(String name) {
+    public ItemBase(String name, CreativeTabs tab) {
         setUnlocalizedName(Reference.MOD_ID + "." + name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.DECORATIONS);
+        setCreativeTab(tab);
         ItemInit.ITEMS.add(this);
     }
 }

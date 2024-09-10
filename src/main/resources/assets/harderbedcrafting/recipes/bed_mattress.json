@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "PSP",
+    "FFF"
+  ],
+  "key": {
+    "F": {
+      "item": "harderbedcrafting:bed_fabric"
+    },
+    "P": {
+      "item": "harderbedcrafting:padded_wool"
+    },
+    "S": {
+      "item": "harderbedcrafting:bed_spring"
+    }
+  },
+  "result": {
+    "item": "harderbedcrafting:bed_mattress"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "L L"
+  ],
+  "key": {
+    "B": {
+      "item": "harderbedcrafting:bed_frame_base"
+    },
+    "L": {
+      "item": "harderbedcrafting:bed_frame_leg"
+    }
+  },
+  "result": {
+    "item": "harderbedcrafting:bed_frame"
+  }
+}

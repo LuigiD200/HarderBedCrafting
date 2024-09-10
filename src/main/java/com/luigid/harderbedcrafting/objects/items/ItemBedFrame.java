@@ -19,8 +19,7 @@ import net.minecraft.world.World;
 
 public class ItemBedFrame extends ItemBase {
     public ItemBedFrame(String name) {
-        super(name);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
+        super(name, CreativeTabs.DECORATIONS);
         this.setMaxDamage(0);
     }
 

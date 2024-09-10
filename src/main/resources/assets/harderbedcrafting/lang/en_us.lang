@@ -20,6 +20,12 @@ item.harderbedcrafting.bed_blanket.green.name=Green Bed Blanket
 item.harderbedcrafting.bed_blanket.red.name=Red Bed Blanket
 item.harderbedcrafting.bed_blanket.black.name=Black Bed Blanket
 
+item.harderbedcrafting.bed_frame_base.name=Bed Frame Base
+item.harderbedcrafting.bed_frame_leg.name=Bed Frame Leg
+item.harderbedcrafting.padded_wool.name=Padded Wool
+item.harderbedcrafting.bed_fabric.name=Bed Fabric
+item.harderbedcrafting.bed_spring.name=Bed Spring
+
 #Blocks
 tile.harderbedcrafting.bed_frame.name=Bed Frame
 tile.harderbedcrafting.bed_frame_mattress.name=Bed Frame with Mattress
