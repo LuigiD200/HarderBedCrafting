@@ -1,7 +1,26 @@
 # Items
 item.harderbedcrafting.bed_frame.name=Bed Frame
 item.harderbedcrafting.bed_mattress.name=Bed Mattress
+item.harderbedcrafting.bed_pillow.name=Bed Pillow
+
+item.harderbedcrafting.bed_blanket.white.name=White Bed Blanket
+item.harderbedcrafting.bed_blanket.orange.name=Orange Bed Blanket
+item.harderbedcrafting.bed_blanket.magenta.name=Magenta Bed Blanket
+item.harderbedcrafting.bed_blanket.lightBlue.name=Light Blue Bed Blanket
+item.harderbedcrafting.bed_blanket.yellow.name=Yellow Bed Blanket
+item.harderbedcrafting.bed_blanket.lime.name=Lime Bed Blanket
+item.harderbedcrafting.bed_blanket.pink.name=Pink Bed Blanket
+item.harderbedcrafting.bed_blanket.gray.name=Gray Bed Blanket
+item.harderbedcrafting.bed_blanket.silver.name=Light Gray Bed Blanket
+item.harderbedcrafting.bed_blanket.cyan.name=Cyan Bed Blanket
+item.harderbedcrafting.bed_blanket.purple.name=Purple Bed Blanket
+item.harderbedcrafting.bed_blanket.blue.name=Blue Bed Blanket
+item.harderbedcrafting.bed_blanket.brown.name=Brown Bed Blanket
+item.harderbedcrafting.bed_blanket.green.name=Green Bed Blanket
+item.harderbedcrafting.bed_blanket.red.name=Red Bed Blanket
+item.harderbedcrafting.bed_blanket.black.name=Black Bed Blanket
 
 #Blocks
 tile.harderbedcrafting.bed_frame.name=Bed Frame
 tile.harderbedcrafting.bed_frame_mattress.name=Bed Frame with Mattress
+tile.harderbedcrafting.bed_frame_mattress_pillow.name=Bed Frame with Mattress and Pillow

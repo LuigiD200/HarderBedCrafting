@@ -1,8 +1,8 @@
 package com.luigid.harderbedcrafting.util.handlers;
 
+import com.luigid.harderbedcrafting.HarderBedCrafting;
 import com.luigid.harderbedcrafting.init.BlockInit;
 import com.luigid.harderbedcrafting.init.ItemInit;
-import com.luigid.harderbedcrafting.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -25,14 +25,10 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : ItemInit.ITEMS) {
-            if (item instanceof IHasModel) {
-                ((IHasModel)item).registerModels();
-            }
+            HarderBedCrafting.proxy.registerItemRenderer(item, 0, "inventory");
         }
         for (Block block : BlockInit.BLOCKS) {
-            if (block instanceof IHasModel) {
-                ((IHasModel)block).registerModels();
-            }
+            HarderBedCrafting.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
         }
     }
 }

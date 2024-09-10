@@ -5,18 +5,14 @@ import com.luigid.harderbedcrafting.init.ItemInit;
 import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -24,36 +20,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-
 public class BlockBedFrame extends BlockHorizontal {
 
     public static final PropertyEnum<BlockPart> PART = PropertyEnum.create("part", BlockPart.class);
-    protected static final AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125, 1.0D);
+    private static final AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125, 1.0D);
 
     public BlockBedFrame(String name, Material material) {
         super(material);
         setUnlocalizedName(Reference.MOD_ID + "." + name);
         setRegistryName(name);
-
         BlockInit.BLOCKS.add(this);
-
-        this.setHardness(0.2F);
-        this.setDefaultState(this.blockState.getBaseState()
+        setHardness(0.2F);
+        setDefaultState(this.blockState.getBaseState()
                 .withProperty(PART, BlockPart.FOOT)
                 .withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
@@ -71,68 +60,42 @@ public class BlockBedFrame extends BlockHorizontal {
                 heldItem.shrink(1);
             }
 
-            // Play wool placing sound
             worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-
             return true;
         }
-
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
-
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         EnumFacing facing = state.getValue(FACING);
-        BlockPos headPos = pos.offset(facing);
-        BlockPos footPos = pos.offset(facing.getOpposite());
-        Block headBlock = worldIn.getBlockState(headPos).getBlock();
-        Block footBlock = worldIn.getBlockState(footPos).getBlock();
+        BlockPos otherPos = pos.offset(state.getValue(PART) == BlockPart.FOOT ? facing : facing.getOpposite());
+        IBlockState otherState = worldIn.getBlockState(otherPos);
+        Block otherBlock = otherState.getBlock();
 
-        if (state.getValue(PART) == BlockPart.FOOT) {
-            // Check if the HEAD block is missing
-            if (headBlock != this) {
-                if (headBlock == BlockInit.BED_FRAME_MATTRESS) {
-                    // Update the HEAD block to match the FOOT block
-                    IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
-                            .withProperty(FACING, facing)
-                            .withProperty(PART, BlockPart.FOOT);
-                    worldIn.setBlockState(pos, newBlockState, 3);
-                } else {
-                    // Remove the FOOT block if HEAD block is missing
-                    worldIn.setBlockToAir(pos);
+        if (otherBlock != this) {
+            if (otherBlock == BlockInit.BED_FRAME_MATTRESS) {
+                IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
+                        .withProperty(FACING, facing)
+                        .withProperty(PART, state.getValue(PART) == BlockPart.FOOT ? BlockPart.FOOT : BlockPart.HEAD);
+                worldIn.setBlockState(pos, newBlockState, 3);
+            } else {
+                if (state.getValue(PART) == BlockPart.HEAD && !worldIn.isRemote) {
+                    spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
+                    spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_MATTRESS));
                 }
-            }
-        } else if (state.getValue(PART) == BlockPart.HEAD) {
-            // Check if the FOOT block is missing
-            if (footBlock != this) {
-                if (footBlock == BlockInit.BED_FRAME_MATTRESS) {
-                    // Update the FOOT block to match the HEAD block
-                    IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS.getDefaultState()
-                            .withProperty(FACING, facing)
-                            .withProperty(PART, BlockPart.HEAD);
-                    worldIn.setBlockState(pos, newBlockState, 3);
-                } else {
-                    // Drop the item if FOOT block is missing
-                    if (!worldIn.isRemote) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
-                    }
-                    worldIn.setBlockToAir(pos);
-                }
+                worldIn.setBlockToAir(pos);
             }
         }
     }
 
-
-
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
-        super.getDrops(drops, world, pos, state, fortune);
-
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         if (state.getValue(PART) == BlockPart.HEAD) {
             drops.clear();
             drops.add(new ItemStack(ItemInit.BED_FRAME));
+        } else {
+            super.getDrops(drops, world, pos, state, fortune);
         }
     }
 
@@ -142,80 +105,66 @@ public class BlockBedFrame extends BlockHorizontal {
     }
 
     @Override
-    public EnumPushReaction getMobilityFlag(IBlockState state)
-    {
+    public EnumPushReaction getMobilityFlag(IBlockState state) {
         return EnumPushReaction.DESTROY;
     }
 
-
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(ItemInit.BED_FRAME);
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-        if (player.capabilities.isCreativeMode && state.getValue(PART) == BlockPart.FOOT)
-        {
-            BlockPos blockpos = pos.offset((EnumFacing)state.getValue(FACING));
-
-            if (worldIn.getBlockState(blockpos).getBlock() == this)
-            {
-                worldIn.setBlockToAir(blockpos);
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (player.capabilities.isCreativeMode && state.getValue(PART) == BlockPart.FOOT) {
+            BlockPos blockPos = pos.offset(state.getValue(FACING));
+            if (worldIn.getBlockState(blockPos).getBlock() == this) {
+                worldIn.setBlockToAir(blockPos);
             }
         }
     }
 
-
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        EnumFacing enumfacing = EnumFacing.getHorizontal(meta & 7);
+        EnumFacing facing = EnumFacing.getHorizontal(meta & 7);
         BlockPart part = (meta & 8) != 0 ? BlockPart.HEAD : BlockPart.FOOT;
-        return this.getDefaultState()
-                .withProperty(FACING, enumfacing)
-                .withProperty(PART, part);
+        return this.getDefaultState().withProperty(FACING, facing).withProperty(PART, part);
     }
 
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        if (state.getValue(PART) == BlockPart.FOOT) {
-            IBlockState iblockstate = worldIn.getBlockState(pos.offset((EnumFacing)state.getValue(FACING)));
-        }
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        // No additional state changes based on surrounding blocks, returning state as is
         return state;
     }
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
+        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        int i = ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+        int meta = state.getValue(FACING).getHorizontalIndex();
         if (state.getValue(PART) == BlockPart.HEAD) {
-            i |= 8;
+            meta |= 8;
         }
-        return i;
+        return meta;
     }
 
     @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
+    @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, PART);
     }
-
 
     public enum BlockPart implements IStringSerializable {
         HEAD("head"),
@@ -232,5 +181,4 @@ public class BlockBedFrame extends BlockHorizontal {
             return this.name;
         }
     }
-
 }

@@ -3,7 +3,6 @@ package com.luigid.harderbedcrafting.objects.items;
 import com.luigid.harderbedcrafting.init.BlockInit;
 import com.luigid.harderbedcrafting.objects.blocks.BlockBedFrame;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -70,12 +69,6 @@ public class ItemBedFrame extends ItemBase {
                 return EnumActionResult.FAIL;
             }
         }
-    }
-
-
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return 1;
     }
 }
 

@@ -2,20 +2,13 @@ package com.luigid.harderbedcrafting.objects.blocks;
 
 import com.luigid.harderbedcrafting.init.BlockInit;
 import com.luigid.harderbedcrafting.init.ItemInit;
-import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -23,61 +16,71 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-
 public class BlockBedFrameMattress extends BlockBedFrame {
-    protected static final AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625, 1.0D);
+    private static final AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625, 1.0D);
 
     public BlockBedFrameMattress(String name, Material material) {
         super(name, material);
     }
 
     @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
-    {
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
         super.onFallenUpon(worldIn, pos, entityIn, fallDistance * 0.5F);
     }
 
     @Override
-    public void onLanded(World worldIn, Entity entityIn)
-    {
-        if (entityIn.isSneaking())
-        {
+    public void onLanded(World worldIn, Entity entityIn) {
+        if (entityIn.isSneaking()) {
             super.onLanded(worldIn, entityIn);
-        }
-        else if (entityIn.motionY < 0.0D)
-        {
-            entityIn.motionY = -entityIn.motionY * 0.6600000262260437D;
-
-            if (!(entityIn instanceof EntityLivingBase))
-            {
+        } else if (entityIn.motionY < 0.0D) {
+            entityIn.motionY = -entityIn.motionY * 0.66D;
+            if (!(entityIn instanceof EntityLivingBase)) {
                 entityIn.motionY *= 0.8D;
             }
         }
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        if (heldItem.getItem() == ItemInit.BED_PILLOW) {
+            IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS_PILLOW.getDefaultState()
+                    .withProperty(FACING, state.getValue(FACING))
+                    .withProperty(PART, state.getValue(PART));
 
-        if (state.getValue(PART) == BlockPart.FOOT)
-        {
-            if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() != this)
-            {
+            worldIn.setBlockState(pos, newBlockState, 3);
+
+            if (!playerIn.isCreative()) {
+                heldItem.shrink(1);
+            }
+
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            return true;
+        }
+
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        EnumFacing facing = state.getValue(FACING);
+        BlockPos otherPos = pos.offset(state.getValue(PART) == BlockPart.FOOT ? facing : facing.getOpposite());
+        IBlockState otherState = worldIn.getBlockState(otherPos);
+        Block otherBlock = otherState.getBlock();
+
+        if (otherBlock != this) {
+            if (otherBlock == BlockInit.BED_FRAME_MATTRESS_PILLOW) {
+                IBlockState newBlockState = BlockInit.BED_FRAME_MATTRESS_PILLOW.getDefaultState()
+                        .withProperty(FACING, facing)
+                        .withProperty(PART, state.getValue(PART) == BlockPart.FOOT ? BlockPart.FOOT : BlockPart.HEAD);
+                worldIn.setBlockState(pos, newBlockState, 3);
+            } else {
+                if (state.getValue(PART) == BlockPart.HEAD && !worldIn.isRemote) {
+                    spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
+                    spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_MATTRESS));
+                }
                 worldIn.setBlockToAir(pos);
             }
-        }
-        else if (worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getBlock() != this)
-        {
-            if (!worldIn.isRemote)
-            {
-                spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_FRAME));
-                spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.BED_MATTRESS));
-            }
-
-            worldIn.setBlockToAir(pos);
         }
     }
 
@@ -87,20 +90,18 @@ public class BlockBedFrameMattress extends BlockBedFrame {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
-        super.getDrops(drops, world, pos, state, fortune);
-
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         if (state.getValue(PART) == BlockPart.HEAD) {
             drops.clear();
             drops.add(new ItemStack(ItemInit.BED_FRAME));
             drops.add(new ItemStack(ItemInit.BED_MATTRESS));
+        } else {
+            super.getDrops(drops, world, pos, state, fortune);
         }
     }
 
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
-        return new ItemStack(Items.AIR);
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return ItemStack.EMPTY;
     }
 }
