@@ -3,13 +3,16 @@ package com.luigid.harderbedcrafting.objects.items;
 import com.luigid.harderbedcrafting.init.BlockInit;
 import com.luigid.harderbedcrafting.objects.blocks.BlockBedFrame;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -48,10 +51,16 @@ public class ItemBedFrame extends ItemBase {
                 boolean flag3 = flag1 || worldIn.isAirBlock(blockpos);
 
                 if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isTopSolid() && worldIn.getBlockState(blockpos.down()).isTopSolid()) {
-                    IBlockState iblockstate2 = BlockInit.BED_FRAME.getDefaultState().withProperty(BlockBedFrame.PART, BlockBedFrame.BlockPart.FOOT).withProperty(BlockBedFrame.FACING, enumfacing);
+                    IBlockState iblockstate2 = BlockInit.BED_FRAME.getDefaultState()
+                            .withProperty(BlockBedFrame.PART, BlockBedFrame.BlockPart.FOOT)
+                            .withProperty(BlockBedFrame.FACING, enumfacing);
+
                     worldIn.setBlockState(pos, iblockstate2, 10);
                     worldIn.setBlockState(blockpos, iblockstate2.withProperty(BlockBedFrame.PART, BlockBedFrame.BlockPart.HEAD), 10);
-                    // Play sound
+
+                    // Play wood placing sound
+                    worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F);
+
                     itemstack.shrink(1);
                     return EnumActionResult.SUCCESS;
                 } else {
@@ -62,6 +71,7 @@ public class ItemBedFrame extends ItemBase {
             }
         }
     }
+
 
     @Override
     public int getItemStackLimit(ItemStack stack) {

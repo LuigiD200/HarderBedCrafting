@@ -5,14 +5,17 @@ import com.luigid.harderbedcrafting.init.ItemInit;
 import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -36,6 +39,7 @@ public class BlockBedFrame extends BlockHorizontal {
 
         BlockInit.BLOCKS.add(this);
 
+        this.setHardness(0.2F);
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(PART, BlockPart.FOOT)
                 .withProperty(FACING, EnumFacing.NORTH));
@@ -67,12 +71,15 @@ public class BlockBedFrame extends BlockHorizontal {
                 heldItem.shrink(1);
             }
 
-            //Play sound event
+            // Play wool placing sound
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
             return true;
         }
 
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
+
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -146,9 +153,6 @@ public class BlockBedFrame extends BlockHorizontal {
     {
         return new ItemStack(ItemInit.BED_FRAME);
     }
-
-
-
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)

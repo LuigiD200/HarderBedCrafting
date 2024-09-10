@@ -11,6 +11,8 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -29,6 +31,30 @@ public class BlockBedFrameMattress extends BlockBedFrame {
 
     public BlockBedFrameMattress(String name, Material material) {
         super(name, material);
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+    {
+        super.onFallenUpon(worldIn, pos, entityIn, fallDistance * 0.5F);
+    }
+
+    @Override
+    public void onLanded(World worldIn, Entity entityIn)
+    {
+        if (entityIn.isSneaking())
+        {
+            super.onLanded(worldIn, entityIn);
+        }
+        else if (entityIn.motionY < 0.0D)
+        {
+            entityIn.motionY = -entityIn.motionY * 0.6600000262260437D;
+
+            if (!(entityIn instanceof EntityLivingBase))
+            {
+                entityIn.motionY *= 0.8D;
+            }
+        }
     }
 
     @Override
