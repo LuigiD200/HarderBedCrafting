@@ -24,11 +24,11 @@ public class RegistryHandler {
 
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
-        for (Item item : ItemInit.ITEMS) {
-            HarderBedCrafting.proxy.registerItemRenderer(item, 0, "inventory");
-        }
-        for (Block block : BlockInit.BLOCKS) {
-            HarderBedCrafting.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
-        }
+
+        for (Item item : ItemInit.ITEMS) HarderBedCrafting.proxy.registerItemRenderer(item, 0, "inventory");
+
+        for (int i=1; i < 16; i++) HarderBedCrafting.proxy.registerItemRenderer(ItemInit.BED_BLANKET, i, "inventory");
+
+        for (Block block : BlockInit.BLOCKS) HarderBedCrafting.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
     }
 }

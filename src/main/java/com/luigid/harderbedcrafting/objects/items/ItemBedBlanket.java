@@ -1,8 +1,10 @@
 package com.luigid.harderbedcrafting.objects.items;
 
 import com.luigid.harderbedcrafting.init.BlockInit;
+import com.luigid.harderbedcrafting.init.ItemInit;
 import com.luigid.harderbedcrafting.objects.blocks.BlockBedFrame;
 import com.luigid.harderbedcrafting.objects.blocks.BlockBedFrameMattressPillow;
+import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -11,23 +13,25 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBed;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemBedBlanket extends ItemBase {
+public class ItemBedBlanket extends Item {
     public ItemBedBlanket(String name) {
-        super(name);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
-        this.setMaxDamage(0);
-        this.setHasSubtypes(true);
+        setUnlocalizedName(Reference.MOD_ID + "." + name);
+        setRegistryName(name);
+        setCreativeTab(CreativeTabs.DECORATIONS);
+        setMaxDamage(0);
+        setHasSubtypes(true);
+
+        ItemInit.ITEMS.add(this);
     }
 
     @Override
@@ -66,6 +70,8 @@ public class ItemBedBlanket extends ItemBase {
             worldIn.setBlockState(pos, newMainBlockState, 10);
             worldIn.setBlockState(otherPos, newOtherBlockState, 10);
 
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
             TileEntity tileentity = worldIn.getTileEntity(otherPos);
             if (tileentity instanceof TileEntityBed) ((TileEntityBed)tileentity).setItemValues(itemstack);
 
@@ -90,6 +96,10 @@ public class ItemBedBlanket extends ItemBase {
         return super.getUnlocalizedName() + "." + EnumDyeColor.byMetadata(stack.getMetadata()).getUnlocalizedName();
     }
 
+    public String getRegistryNameAndDyeColor (int meta) {
+        return super.getRegistryName()+"_"+EnumDyeColor.byMetadata(meta).getDyeColorName();
+    }
+
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
     {
         if (this.isInCreativeTab(tab))
@@ -99,5 +109,9 @@ public class ItemBedBlanket extends ItemBase {
                 items.add(new ItemStack(this, 1, i));
             }
         }
+    }
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return 1;
     }
 }
