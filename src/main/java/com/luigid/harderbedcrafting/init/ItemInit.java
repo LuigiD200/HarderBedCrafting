@@ -27,6 +27,7 @@ public class ItemInit {
     };
     public static final Item BED_BLANKET = new ItemBedBlanket("bed_blanket");
 
+
     //INGREDIENTS
     public static final Item BED_FRAME_BASE = new ItemBase("bed_frame_base", CreativeTabs.MISC);
     public static final Item BED_FRAME_LEG = new ItemBase("bed_frame_leg", CreativeTabs.MISC);

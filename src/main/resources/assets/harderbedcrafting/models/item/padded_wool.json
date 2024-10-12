@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "harderbedcrafting:items/bed_pillow"
+    "layer0": "harderbedcrafting:items/padded_wool"
   }
 }

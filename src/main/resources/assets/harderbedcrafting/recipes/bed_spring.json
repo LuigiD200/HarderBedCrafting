@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "I",
-    "S",
-    "I"
+    "NIN",
+    "ISI",
+    "NIN"
   ],
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
     },
     "S": {
       "item": "minecraft:slime_ball"
