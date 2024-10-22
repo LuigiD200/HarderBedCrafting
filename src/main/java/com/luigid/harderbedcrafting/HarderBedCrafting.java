@@ -10,8 +10,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class HarderBedCrafting {
-
-
     @Mod.Instance
     public static HarderBedCrafting instance;
 
@@ -26,7 +24,4 @@ public class HarderBedCrafting {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {}
-
-
-
 }
