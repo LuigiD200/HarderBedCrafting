@@ -4,7 +4,7 @@
   "description": "A mod that makes crafting beds more challenging by adding new materials and recipes.",
   "version": "1.0",
   "mcversion": "1.12.2",
-  "logoFile": "",
+  "logoFile": "assets/icon.png",
   "url": "https://github.com/LuigiD200/HarderBedCrafting",
   "updateJSON": "",
   "authorList": ["LuigiD"],
