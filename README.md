@@ -14,13 +14,13 @@ To craft a bed in this mod, follow these steps:
 2. Craft a Bed Mattress and place it on top of the Bed Frame.
 3. Craft a Bed Pillow and place it on top of the Bed Frame with the Mattress.
 4. Craft any Bed Blanket and place it on top of everything else.
-5. Enjoy your bed after having wasted a lot of resources; you might need to sleep!
+5. Enjoy your bed after having wasted a lot of resources; you might need to rest!
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Credits
-I want to thank:
+I want to thanks:
 - My friend Wither Ita for making all the item and block textures and the logo.
 - [Harry Talks](https://www.youtube.com/@HarrysTechReviews) and [TurtyWurty](https://www.youtube.com/@TurtyWurty) for their YouTube tutorials.
 - The [Minecraft Pack Development](https://discord.gg/KDaRXQzK) community for helping me keep my sanity intact.
