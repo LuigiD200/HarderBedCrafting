@@ -20,7 +20,7 @@ To craft a bed in this mod, follow these steps:
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Credits
-I want to thanks:
+I want to thank:
 - My friend Wither Ita for making all the item and block textures and the logo.
 - [Harry Talks](https://www.youtube.com/@HarrysTechReviews) and [TurtyWurty](https://www.youtube.com/@TurtyWurty) for their YouTube tutorials.
 - The [Minecraft Pack Development](https://discord.gg/KDaRXQzK) community for helping me keep my sanity intact.
