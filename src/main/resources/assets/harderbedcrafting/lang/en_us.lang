@@ -1,7 +1,7 @@
-# Items
+#Items
 item.harderbedcrafting.bed_frame.name=Bed Frame
-item.harderbedcrafting.bed_mattress.name=Bed Mattress
-item.harderbedcrafting.bed_pillow.name=Bed Pillow
+item.harderbedcrafting.bed_mattress.name=Mattress
+item.harderbedcrafting.bed_pillow.name=Pillow
 
 item.harderbedcrafting.bed_blanket.white.name=White Bed Blanket
 item.harderbedcrafting.bed_blanket.orange.name=Orange Bed Blanket
@@ -20,8 +20,8 @@ item.harderbedcrafting.bed_blanket.green.name=Green Bed Blanket
 item.harderbedcrafting.bed_blanket.red.name=Red Bed Blanket
 item.harderbedcrafting.bed_blanket.black.name=Black Bed Blanket
 
-item.harderbedcrafting.bed_frame_base.name=Bed Frame Base
-item.harderbedcrafting.bed_frame_leg.name=Bed Frame Legs
+item.harderbedcrafting.bed_frame_base.name=Bed Base
+item.harderbedcrafting.bed_frame_leg.name=Bed Legs
 item.harderbedcrafting.padded_wool.name=Padded Wool
 item.harderbedcrafting.bed_fabric.name=Bed Fabric
 item.harderbedcrafting.bed_spring.name=Bed Spring

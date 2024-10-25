@@ -1,0 +1,32 @@
+#Items
+item.harderbedcrafting.bed_frame.name=Telaio del Letto
+item.harderbedcrafting.bed_mattress.name=Materasso
+item.harderbedcrafting.bed_pillow.name=Cuscino
+
+item.harderbedcrafting.bed_blanket.white.name=Coperta Bianca
+item.harderbedcrafting.bed_blanket.orange.name=Coperta Arancione
+item.harderbedcrafting.bed_blanket.magenta.name=Coperta Magenta
+item.harderbedcrafting.bed_blanket.lightBlue.name=Coperta Azzurra
+item.harderbedcrafting.bed_blanket.yellow.name=Coperta Gialla
+item.harderbedcrafting.bed_blanket.lime.name=Coperta Verde Chiaro
+item.harderbedcrafting.bed_blanket.pink.name=Coperta Rosa
+item.harderbedcrafting.bed_blanket.gray.name=Coperta Grigia
+item.harderbedcrafting.bed_blanket.silver.name=Coperta Grigio Chiaro
+item.harderbedcrafting.bed_blanket.cyan.name=Coperta Ciano
+item.harderbedcrafting.bed_blanket.purple.name=Coperta Viola
+item.harderbedcrafting.bed_blanket.blue.name=Coperta Blu
+item.harderbedcrafting.bed_blanket.brown.name=Coperta Marrone
+item.harderbedcrafting.bed_blanket.green.name=Coperta Verde
+item.harderbedcrafting.bed_blanket.red.name=Coperta Rossa
+item.harderbedcrafting.bed_blanket.black.name=Coperta Nera
+
+item.harderbedcrafting.bed_frame_base.name=Base del Letto
+item.harderbedcrafting.bed_frame_leg.name=Gambe del Letto
+item.harderbedcrafting.padded_wool.name=Lana Imbottita
+item.harderbedcrafting.bed_fabric.name=Tessuto per Letto
+item.harderbedcrafting.bed_spring.name=Molla del Letto
+
+#Blocks
+tile.harderbedcrafting.bed_frame.name=Telaio del Letto
+tile.harderbedcrafting.bed_frame_mattress.name=Telaio del Letto con Materasso
+tile.harderbedcrafting.bed_frame_mattress_pillow.name=Telaio del Letto con Materasso e Cuscino
