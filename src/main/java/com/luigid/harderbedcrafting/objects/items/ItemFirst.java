@@ -1,5 +1,7 @@
-package com.luigid.harderbedcrafting.objects;
+package com.luigid.harderbedcrafting.objects.items;
 
+import com.luigid.harderbedcrafting.objects.BlockAndItemLink;
+import com.luigid.harderbedcrafting.objects.blocks.BlockBedBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;

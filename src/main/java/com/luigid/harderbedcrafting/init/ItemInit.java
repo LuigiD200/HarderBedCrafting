@@ -1,8 +1,8 @@
 package com.luigid.harderbedcrafting.init;
 
-import com.luigid.harderbedcrafting.objects.ItemBase;
-import com.luigid.harderbedcrafting.objects.ItemLast;
-import com.luigid.harderbedcrafting.objects.ItemFirst;
+import com.luigid.harderbedcrafting.objects.items.ItemBase;
+import com.luigid.harderbedcrafting.objects.items.ItemLast;
+import com.luigid.harderbedcrafting.objects.items.ItemFirst;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 

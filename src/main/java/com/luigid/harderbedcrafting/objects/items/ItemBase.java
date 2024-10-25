@@ -1,4 +1,4 @@
-package com.luigid.harderbedcrafting.objects;
+package com.luigid.harderbedcrafting.objects.items;
 
 import com.luigid.harderbedcrafting.init.ItemInit;
 import com.luigid.harderbedcrafting.util.Reference;

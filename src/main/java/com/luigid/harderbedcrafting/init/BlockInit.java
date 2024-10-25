@@ -1,6 +1,6 @@
 package com.luigid.harderbedcrafting.init;
 
-import com.luigid.harderbedcrafting.objects.BlockBedBase;
+import com.luigid.harderbedcrafting.objects.blocks.BlockBedBase;
 import com.luigid.harderbedcrafting.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

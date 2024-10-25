@@ -1,6 +1,7 @@
-package com.luigid.harderbedcrafting.objects;
+package com.luigid.harderbedcrafting.objects.blocks;
 
 import com.luigid.harderbedcrafting.init.BlockInit;
+import com.luigid.harderbedcrafting.objects.BlockAndItemLink;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockHorizontal;

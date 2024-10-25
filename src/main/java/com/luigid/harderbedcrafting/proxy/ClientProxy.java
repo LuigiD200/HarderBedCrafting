@@ -1,7 +1,7 @@
 package com.luigid.harderbedcrafting.proxy;
 
 import com.luigid.harderbedcrafting.init.ItemInit;
-import com.luigid.harderbedcrafting.objects.ItemLast;
+import com.luigid.harderbedcrafting.objects.items.ItemLast;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
