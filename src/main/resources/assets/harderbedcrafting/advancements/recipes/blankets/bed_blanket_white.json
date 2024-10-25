@@ -1,0 +1,55 @@
+{
+  "parent": "harderbedcrafting:recipes/root",
+  "rewards": {
+    "recipes": [
+      "harderbedcrafting:bed_blanket_white"
+    ]
+  },
+  "criteria": {
+    "has_bed_fabric": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_fabric"
+          }
+        ]
+      }
+    },
+    "has_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wool",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_bed_frame": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_frame"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe":  "harderbedcrafting:bed_blanket_white"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bed_fabric",
+      "has_wool",
+      "has_bed_frame",
+      "has_the_recipe"
+    ]
+  ]
+}

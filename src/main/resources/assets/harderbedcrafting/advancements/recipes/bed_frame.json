@@ -1,0 +1,43 @@
+{
+  "parent": "harderbedcrafting:recipes/root",
+  "rewards": {
+    "recipes": [
+      "harderbedcrafting:bed_frame"
+    ]
+  },
+  "criteria": {
+    "has_bed_frame_base": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_frame_base"
+          }
+        ]
+      }
+    },
+    "has_bed_frame_leg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_frame_leg"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "harderbedcrafting:bed_frame"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bed_frame_base",
+      "has_bed_frame_leg",
+      "has_the_recipe"
+    ]
+  ]
+}

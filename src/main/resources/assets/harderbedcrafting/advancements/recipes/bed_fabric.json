@@ -1,0 +1,43 @@
+{
+  "parent": "harderbedcrafting:recipes/root",
+  "rewards": {
+    "recipes": [
+      "harderbedcrafting:bed_fabric"
+    ]
+  },
+  "criteria": {
+    "has_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wool"
+          }
+        ]
+      }
+    },
+    "has_string": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:string"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "harderbedcrafting:bed_fabric"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wool",
+      "has_string",
+      "has_the_recipe"
+    ]
+  ]
+}

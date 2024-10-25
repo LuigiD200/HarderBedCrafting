@@ -1,0 +1,65 @@
+{
+  "parent": "harderbedcrafting:recipes/root",
+  "rewards": {
+    "recipes": [
+      "harderbedcrafting:bed_mattress"
+    ]
+  },
+  "criteria": {
+    "has_bed_fabric": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_fabric"
+          }
+        ]
+      }
+    },
+    "has_padded_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:padded_wool"
+          }
+        ]
+      }
+    },
+    "has_bed_spring": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_spring"
+          }
+        ]
+      }
+    },
+    "has_bed_frame": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "harderbedcrafting:bed_frame"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "harderbedcrafting:bed_mattress"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bed_fabric",
+      "has_padded_wool",
+      "has_bed_spring",
+      "has_bed_frame",
+      "has_the_recipe"
+    ]
+  ]
+}
