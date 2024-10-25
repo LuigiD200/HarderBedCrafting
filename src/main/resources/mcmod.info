@@ -1,12 +1,12 @@
 [{
   "modid": "harderbedcrafting",
   "name": "Harder Bed Crafting",
-  "description": "A mod that makes crafting beds more challenging by adding new materials and recipes.",
+  "description": "A Minecraft 1.12.2 mod that replaces the vanilla bed crafting recipe with a custom method for creating beds.",
   "version": "1.0",
   "mcversion": "1.12.2",
   "logoFile": "assets/icon.png",
   "url": "https://github.com/LuigiD200/HarderBedCrafting",
   "updateJSON": "",
   "authorList": ["LuigiD"],
-  "credits": "Wither Ita, for the amazing textures; Harry Talks, for his YT series; Minecraft Pack Development's Discord for helping me keep my sanity intact."
+  "credits": "My friend Wither Ita for making all the item and block textures and the logo; Harry Talks and TurtyWurty for their YouTube tutorials; The Minecraft Pack Development community for helping me keep my sanity intact; My mind for enduring all the pain this has brought me."
 }]
